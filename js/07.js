@@ -1,7 +1,7 @@
-const input = document.getElementById('font-size-control');
-const text = document.getElementById('text');
-
 function bindEvents() {
+  const input = document.getElementById('font-size-control');
+  const text = document.getElementById('text');
+
   if (!input || !text) {
     return;
   }
@@ -16,20 +16,3 @@ function bindEvents() {
     updateFontSize(fontSize);
   });
 }
-
-function updateFontSize(fontSize) {
-  text.style.fontSize = `${fontSize}px`;
-}
-
-function setInitialFontSize() {
-  const initialFontSize = Number(input?.value);
-
-  if (isNaN(initialFontSize)) {
-    return;
-  }
-
-  updateFontSize(initialFontSize);
-}
-
-setInitialFontSize();
-bindEvents();

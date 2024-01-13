@@ -1,20 +1,22 @@
-const nameInput = document.getElementById('name-input');
-const nameOutput = document.getElementById('name-output');
+document.addEventListener('DOMContentLoaded', function () {
+  const nameInput = document.getElementById('name-input');
+  const nameOutput = document.getElementById('name-output');
 
-function bindEvents() {
-  if (!nameInput) {
-    return;
+  function bindEvents() {
+    if (!nameInput) {
+      return;
+    }
+
+    nameInput.addEventListener('input', event => updateOutput(event.target.value));
   }
 
-  nameInput.addEventListener('input', event => updateOutput(event.target.value));
-}
+  function updateOutput(content) {
+    if (!nameOutput) {
+      return;
+    }
 
-function updateOutput(content) {
-  if (!nameOutput) {
-    return;
+    nameOutput.textContent = content || 'Anonymous';
   }
 
-  nameOutput.textContent = content || 'Anonymous';
-}
-
-bindEvents();
+  bindEvents();
+});

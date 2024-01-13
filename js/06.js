@@ -5,7 +5,7 @@ function bindEvents() {
     return;
   }
 
-  input.addEventListener('blur', () => {
+  input.addEventListener('input', () => {
     const desiredLength = Number(input.dataset.length);
 
     if (isNaN(desiredLength)) {
