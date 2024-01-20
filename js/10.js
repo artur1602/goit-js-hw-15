@@ -1,19 +1,47 @@
+const boxesContainer = document.getElementById('boxes');
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
+
+function createBox(size) {
+  const element = document.createElement('div');
+  element.style.backgroundColor = getRandomHexColor();
+  element.style.height = `${size}px`;
+  element.style.width = `${size}px`;
+
+  return element;
+}
+
+function createBoxes(amount) {
+  const boxes = [];
+  const existingChildrenAmount = boxesContainer.children.length || 0;
+
+  for (let i = 0; i < amount; i += 1) {
+    boxes.push(createBox(30 + (i + existingChildrenAmount) * 10));
+  }
+
+  boxesContainer?.append(...boxes);
+}
+
+function destroyBoxes() {
+  if (!boxesContainer) {
+    return;
+  }
+
+  boxesContainer.innerHTML = '';
+}
+
 function bindEvents() {
-  const inputNumber = document.querySelector('#controls > input[type="number"]');
-  const buttonCreate = document.querySelector('[data-create]');
-  const buttonDestroy = document.querySelector('[data-destroy]');
+  document.querySelector('[data-create]')?.addEventListener('click', () => {
+    const amount = document.querySelector('#controls > input[type="number"]')?.value || 0;
 
-  buttonCreate?.addEventListener('click', () => {
-    const amount = Number(inputNumber?.value);
-
-    if (Number.isInteger(amount) && amount >= 1 && amount <= 100) {
-      createBoxes(amount);
-    } else {
-      alert('Please enter a valid integer between 1 and 100.');
-    }
+    createBoxes(Number(amount));
   });
 
-  buttonDestroy?.addEventListener('click', destroyBoxes);
+  document.querySelector('[data-destroy]')?.addEventListener('click', destroyBoxes);
 }
 
 bindEvents();
